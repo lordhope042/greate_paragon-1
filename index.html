@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Paragon | Luxury Shopping Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c1e3e;
+            --secondary: #c9a96e;
+            --accent: #e63946;
+            --light: #f9f5f0;
+            --dark: #0a1520;
+            --gold-light: #f4e9d3;
+            --gold-dark: #b89446;
+            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .cormorant {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Luxurious Header */
+        .luxury-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(12, 30, 62, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            filter: drop-shadow(0 0 5px rgba(201, 169, 110, 0.5));
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--secondary), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-top: 5px;
+        }
+        
+        .contact-gold {
+            background: linear-gradient(135deg, var(--secondary), var(--gold-dark));
+            padding: 12px 25px;
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+        
+        .contact-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* Hero Section with Parallax */
+        .parallax-hero {
+            height: 100vh;
+            background: linear-gradient(rgba(12, 30, 62, 0.85), rgba(12, 30, 62, 0.7)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--gold-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+        
+        .gold-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--secondary), var(--gold-dark));
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gold-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .gold-button:hover:before {
+            left: 100%;
+        }
+        
+        .gold-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Luxury Offerings */
+        .luxury-offerings {
+            padding: 100px 0;
+            background-color: var(--light);
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary), var(--gold-dark));
+        }
+        
+        .section-header p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 25px auto 0;
+        }
+        
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .offering-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            position: relative;
+            height: 400px;
+            perspective: 1000px;
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.8s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .card-front {
+            background: white;
+            z-index: 2;
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, var(--primary), #1a2f5a);
+            color: white;
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+        
+        .offering-card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+        
+        .offering-card:hover .card-back {
+            transform: rotateY(0);
+        }
+        
+        .offering-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            filter: drop-shadow(0 5px 10px rgba(201, 169, 110, 0.3));
+        }
+        
+        .offering-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .card-back h3 {
+            color: var(--secondary);
+        }
+        
+        /* Experience Section */
+        .experience-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), #14274e);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .experience-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .experience-text h2 {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+        }
+        
+        .experience-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .experience-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            background: rgba(201, 169, 110, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+        
+        .experience-visual {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1), rgba(12, 30, 62, 0.3));
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* Location Luxury */
+        .location-luxury {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .location-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .location-header h2 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .location-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .location-map {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary), #1a2f5a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-map:before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: moveMap 30s linear infinite;
+        }
+        
+        @keyframes moveMap {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+        
+        .location-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .location-address {
+            margin-bottom: 40px;
+        }
+        
+        .location-address h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .address-detail {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 15px;
+            padding-left: 35px;
+        }
+        
+        .brand-quote {
+            margin-top: 80px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1), rgba(12, 30, 62, 0.05));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-quote:before {
+            content: '“';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 12rem;
+            color: rgba(201, 169, 110, 0.1);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .brand-quote p {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.4;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .brand-quote .author {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        /* Luxury Footer */
+        .luxury-footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-brand {
+            max-width: 350px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h4 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact h4 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.8rem;
+            }
+            
+            .experience-text h2 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.3rem;
+            }
+            
+            .experience-text h2 {
+                font-size: 2.3rem;
+            }
+            
+            .brand-quote p {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--secondary), var(--gold-dark));
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Luxury Header -->
+    <header class="luxury-header">
+        <div class="container header-inner">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="logo-text">
+                    <h1 class="cormorant">GREAT PARAGON</h1>
+                    <div class="tagline">Investment & Allied Services Limited</div>
+                </div>
+            </div>
+            <a href="tel:09125473126" class="contact-gold">
+                <i class="fas fa-phone-alt"></i> 09125473126
+            </a>
+        </div>
+    </header>
+
+    <!-- Parallax Hero Section -->
+    <section class="parallax-hero">
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 100px; height: 100px; top: 20%; left: 10%;"></div>
+            <div class="floating-element" style="width: 150px; height: 150px; top: 60%; right: 15%;"></div>
+            <div class="floating-element" style="width: 80px; height: 80px; bottom: 30%; left: 20%;"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title">Where Luxury Meets Purpose</h1>
+            <p class="hero-subtitle">An unparalleled shopping experience in the heart of Kazaure. Discover designer perfumes, exquisite fashion, premium hair accessories, baby essentials, and everything in between.</p>
+            <a href="#offerings" class="gold-button">
+                <span>Explore Our Collections</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Luxury Offerings -->
+    <section class="luxury-offerings" id="offerings">
+        <div class="container">
+            <div class="section-header">
+                <h2>✨ Our Exclusive Collections ✨</h2>
+                <p>Indulge in our curated selection of premium products designed for the discerning customer</p>
+            </div>
+            
+            <div class="offerings-grid">
+                <div class="offering-card">
+                    <div class="card-front">
+                        <div class="offering-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3>Luxury Perfumes</h3>
+                        <p>Signature scents that define elegance and sophistication</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Designer Fragrances</h3>
+                        <p>From classic to contemporary, our collection includes exclusive brands not found elsewhere in the region.</p>
+                        <div style="margin-top: 20px; font-size: 0.9rem;">Smell like royalty</div>
+                    </div>
+                </div>
+                
+                <div class="offering-card">
+                    <div class="card-front">
+                        <div class="offering-icon">
+                            <i class="fas fa-vest"></i>
+                        </div>
+                        <h3>Fashion Collections</h3>
+                        <p>Trendsetting outfits for men and women</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Style Redefined</h3>
+                        <p>Carefully curated fashion pieces that blend comfort, style, and luxury for every occasion.</p>
+                        <div style="margin-top: 20px; font-size: 0.9rem;">Look sharp, feel exceptional</div>
+                    </div>
+                </div>
+                
+                <div class="offering-card">
+                    <div class="card-front">
+                        <div class="offering-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Hair Accessories</h3>
+                        <p>Premium pieces for that perfect finish</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Hair Elegance</h3>
+                        <p>From everyday essentials to special occasion masterpieces, our hair accessories complete your look.</p>
+                        <div style="margin-top: 20px; font-size: 0.9rem;">The perfect finishing touch</div>
+                    </div>
+                </div>
+                
+                <div class="offering-card">
+                    <div class="card-front">
+                        <div class="offering-icon">
+                            <i class="fas fa-baby-carriage"></i>
+                        </div>
+                        <h3>Baby Essentials</h3>
+                        <p>Quality products for your precious little ones</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Premium Baby Care</h3>
+                        <p>Bathing sets, clothing, and essential items made with the finest materials for your baby's comfort and safety.</p>
+                        <div style="margin-top: 20px; font-size: 0.9rem;">Because they deserve the best</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="experience-content">
+                <div class="experience-text">
+                    <h2>The Great Paragon Experience</h2>
+                    <p>More than just a shopping destination, we offer an immersive experience where every detail is crafted for your pleasure and convenience.</p>
+                    
+                    <div class="experience-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <h4>Curated Excellence</h4>
+                                <p>Every product is handpicked for quality</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h4>Personalized Service</h4>
+                                <p>Tailored recommendations just for you</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h4>Premium Quality</h4>
+                                <p>Uncompromising standards in every product</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div>
+                                <h4>Exceptional Value</h4>
+                                <p>Luxury that doesn't break the bank</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-visual">
+                    <div style="text-align: center; color: var(--secondary); font-size: 5rem; margin-bottom: 20px;">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <h3 style="color: var(--secondary); text-align: center; margin-bottom: 20px;">Multi-Purpose Shopping Center</h3>
+                    <p style="text-align: center; color: rgba(255, 255, 255, 0.9);">
+                        Your one-stop destination for all shopping needs - from luxury items to daily essentials, all under one exquisite roof.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Luxury -->
+    <section class="location-luxury" id="location">
+        <div class="container">
+            <div class="location-header">
+                <h2>📍 Visit Our Luxury Destination</h2>
+                <p>Experience Great Paragon in person at our prestigious location</p>
+            </div>
+            
+            <div class="location-card">
+                <div class="location-map">
+                    <div style="position: relative; z-index: 2; text-align: center;">
+                        <div style="font-size: 4rem; color: var(--secondary); margin-bottom: 20px;">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3 style="color: var(--secondary); margin-bottom: 15px;">We Are Here</h3>
+                        <p style="font-size: 1.2rem; max-width: 300px;">
+                            In the heart of Kazaure, Jigawa State
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="location-info">
+                    <div class="location-address">
+                        <h3><i class="fas fa-map-pin" style="color: var(--secondary);"></i> Our Address</h3>
+                        <p class="address-detail">
+                            <strong>Opposite Garabasa Kanti, Kazaure, Jigawa State</strong>
+                        </p>
+                        <p class="address-detail">
+                            <i class="fas fa-clock" style="color: var(--secondary);"></i> <strong>Opening Hours:</strong><br>
+                            Monday - Saturday: 8:00 AM - 8:00 PM<br>
+                            Sunday: 10:00 AM - 6:00 PM
+                        </p>
+                        <p class="address-detail">
+                            <i class="fas fa-phone-alt" style="color: var(--secondary);"></i> <strong>Contact:</strong> 09125473126
+                        </p>
+                    </div>
+                    
+                    <div class="location-address">
+                        <h3><i class="fas fa-car" style="color: var(--secondary);"></i> Visit Us Today</h3>
+                        <p class="address-detail">
+                            Conveniently located in the heart of the city with ample parking and a luxurious shopping environment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="brand-quote">
+                <p>Quality meets Luxury. This brand is light!</p>
+                <div class="author">— Great Paragon Motto</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Footer -->
+    <footer class="luxury-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="cormorant">Great Paragon</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 20px;">
+                        Your premier destination for luxury shopping in Kazaure, Jigawa State. Experience the perfect blend of quality, variety, and exceptional service.
+                    </p>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i>
+                        <span>Opposite Garabasa Kanti, Kazaure, Jigawa State</span>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#offerings"><i class="fas fa-chevron-right"></i> Collections</a></li>
+                        <li><a href="#location"><i class="fas fa-chevron-right"></i> Visit Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Great Paragon</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Information</h4>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone-alt" style="color: var(--secondary);"></i>
+                        <span>09125473126</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-clock" style="color: var(--secondary);"></i>
+                        <span>Mon-Sat: 8AM-8PM<br>Sun: 10AM-6PM</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-shopping-bag" style="color: var(--secondary);"></i>
+                        <span>Multi-Purpose Shopping Center</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Great Paragon Investment & Allied Services Limited. All Rights Reserved.</p>
+                <p style="margin-top: 10px; color: var(--secondary);">"Quality meets Luxury. This brand is light!"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.luxury-header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(12, 30, 62, 0.98)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.background = 'rgba(12, 30, 62, 0.95)';
+            }
+        });
+        
+        // Floating elements animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 2}s`;
+            });
+            
+            // Animate offering cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe offering cards
+            document.querySelectorAll('.offering-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(card);
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax-hero');
+            parallax.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>
