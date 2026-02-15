@@ -2,1005 +2,2306 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Great Paragon | Luxury Shopping Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Great Paragon | The Ultimate Luxury Destination</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #0c1e3e;
-            --secondary: #c9a96e;
-            --accent: #e63946;
-            --light: #f9f5f0;
-            --dark: #0a1520;
-            --gold-light: #f4e9d3;
-            --gold-dark: #b89446;
-            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.12);
-            --shadow-strong: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary: #0a1922;
+            --secondary: #d4af37;
+            --accent: #c49b63;
+            --light: #faf7f2;
+            --dark: #0a0f15;
+            --gold: linear-gradient(135deg, #d4af37, #b8860b, #d4af37);
+            --silver: linear-gradient(135deg, #e8e8e8, #b0b0b0, #e8e8e8);
+            --shadow: 0 20px 40px rgba(0,0,0,0.1);
+            --shadow-strong: 0 30px 60px rgba(0,0,0,0.15);
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light);
             color: var(--dark);
-            background-color: var(--light);
-            line-height: 1.7;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
-        
-        h1, h2, h3, h4, h5 {
+
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            line-height: 1.2;
         }
-        
-        .cormorant {
-            font-family: 'Cormorant Garamond', serif;
+
+        /* Custom Cursor - Hidden on Mobile */
+        @media (min-width: 769px) {
+            .cursor {
+                width: 20px;
+                height: 20px;
+                border: 2px solid var(--secondary);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: 0.1s;
+                transform: translate(-50%, -50%);
+                mix-blend-mode: difference;
+            }
+
+            .cursor-follower {
+                width: 40px;
+                height: 40px;
+                background: rgba(212, 175, 55, 0.1);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9998;
+                transition: 0.3s;
+                transform: translate(-50%, -50%);
+                backdrop-filter: blur(2px);
+            }
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
         }
-        
-        /* Luxurious Header */
-        .luxury-header {
+
+        .preloader-content {
+            text-align: center;
+            color: var(--secondary);
+            animation: pulse 2s ease-in-out infinite;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .preloader-logo i {
+            font-size: min(80px, 15vw);
+            color: var(--secondary);
+            filter: drop-shadow(0 0 20px rgba(212,175,55,0.5));
+        }
+
+        .preloader-spinner {
+            width: min(100px, 25vw);
+            height: min(100px, 25vw);
+            border: 4px solid rgba(212, 175, 55, 0.1);
+            border-top: 4px solid var(--secondary);
+            border-right: 4px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            margin: 30px auto;
+            box-shadow: 0 0 30px rgba(212,175,55,0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preloader h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+        }
+
+        .preloader p {
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        .preloader-progress {
+            width: min(300px, 80vw);
+            height: 3px;
+            background: rgba(212,175,55,0.2);
+            margin: 30px auto 0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .preloader-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--gold);
+            animation: load 5s linear forwards;
+        }
+
+        @keyframes load {
+            to { width: 100%; }
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 30px;
+            height: 3px;
+            background: var(--secondary);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Navigation */
+        .nav-container {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(12, 30, 62, 0.95);
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
-        }
-        
-        .header-inner {
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s;
+            background: linear-gradient(to bottom, rgba(5, 12, 20, 0.98), transparent);
         }
-        
-        .brand-logo {
+
+        .nav-container.scrolled {
+            background: rgba(5, 12, 20, 0.98);
+            padding: 12px 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .logo-icon {
-            font-size: 2.8rem;
-            color: var(--secondary);
-            filter: drop-shadow(0 0 5px rgba(201, 169, 110, 0.5));
+
+        .logo-3d {
+            width: clamp(40px, 6vw, 60px);
+            height: clamp(40px, 6vw, 60px);
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 0 30px rgba(212,175,55,0.3);
         }
-        
-        .logo-text h1 {
-            font-size: 1.8rem;
-            background: linear-gradient(to right, var(--secondary), var(--gold-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
-        }
-        
-        .logo-text .tagline {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin-top: 5px;
-        }
-        
-        .contact-gold {
-            background: linear-gradient(135deg, var(--secondary), var(--gold-dark));
-            padding: 12px 25px;
-            border-radius: 50px;
+
+        .logo-3d i {
+            font-size: clamp(20px, 3vw, 30px);
             color: var(--primary);
-            font-weight: 700;
-            font-size: 1.1rem;
+        }
+
+        .logo-text h1 {
+            font-size: clamp(16px, 3vw, 24px);
+            color: var(--secondary);
+            letter-spacing: 2px;
+        }
+
+        .logo-text p {
+            font-size: clamp(8px, 1.5vw, 12px);
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 3px;
+        }
+
+        .nav-menu {
             display: flex;
+            gap: 30px;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
         }
-        
-        .contact-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 12px 20px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                gap: 25px;
+                transition: right 0.3s;
+                padding: 40px;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                font-size: 18px;
+            }
+            
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
         }
-        
-        /* Hero Section with Parallax */
-        .parallax-hero {
-            height: 100vh;
-            background: linear-gradient(rgba(12, 30, 62, 0.85), rgba(12, 30, 62, 0.7)), 
-                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            max-width: 800px;
+
+        .nav-item {
             color: white;
-            z-index: 2;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
             position: relative;
         }
-        
-        .hero-title {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--gold-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.1;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+        .nav-item:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
         }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--gold-light);
-            margin-bottom: 2.5rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
+
+        .nav-item:hover:after {
+            width: 100%;
         }
-        
-        .gold-button {
+
+        .nav-item:hover {
+            color: var(--secondary);
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--secondary), var(--gold-dark));
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            background: var(--secondary);
             color: var(--primary);
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+        }
+
+        .btn-register {
+            background: var(--gold);
+            border: none;
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: var(--primary);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
             position: relative;
             overflow: hidden;
         }
-        
-        .gold-button:before {
+
+        #canvas-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            filter: brightness(0.5) contrast(1.2);
+        }
+
+        .hero-section::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .gold-button:hover:before {
-            left: 100%;
-        }
-        
-        .gold-button:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-strong);
-        }
-        
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 2;
             pointer-events: none;
         }
-        
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: white;
+            max-width: 700px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            padding-right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                left: 5%;
+                right: 5%;
+                text-align: center;
+                padding: 0 20px;
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #ffd700, #ffb347, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            text-shadow: 0 2px 10px rgba(255,215,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.7s;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            line-height: 1.6;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Elements */
         .floating-element {
             position: absolute;
-            background: rgba(201, 169, 110, 0.1);
-            border: 1px solid rgba(201, 169, 110, 0.3);
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.1);
             border-radius: 50%;
             backdrop-filter: blur(5px);
-            animation: float 15s infinite ease-in-out;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
         }
-        
+
+        @media (max-width: 768px) {
+            .floating-element {
+                display: none;
+            }
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(180deg); }
         }
-        
-        /* Luxury Offerings */
-        .luxury-offerings {
-            padding: 100px 0;
-            background-color: var(--light);
+
+        /* Product Showcase */
+        .showcase-section {
+            padding: clamp(50px, 10vw, 100px) 20px;
+            background: var(--light);
             position: relative;
         }
-        
+
         .section-header {
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: clamp(30px, 8vw, 60px);
         }
-        
+
         .section-header h2 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 6vw, 3.5rem);
             color: var(--primary);
             margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
         }
-        
-        .section-header h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, var(--secondary), var(--gold-dark));
-        }
-        
+
         .section-header p {
             color: #666;
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 25px auto 0;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            padding: 0 20px;
         }
-        
-        .offerings-grid {
+
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(15px, 4vw, 30px);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 10px;
         }
-        
-        .offering-card {
+
+        .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
             position: relative;
-            height: 400px;
-            perspective: 1000px;
+            cursor: pointer;
         }
-        
-        .card-front, .card-back {
-            position: absolute;
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .product-image {
+            height: clamp(200px, 40vw, 300px);
+            background: linear-gradient(135deg, var(--primary), #1a2f3f);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
-            transition: transform 0.8s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
-        
-        .card-front {
-            background: white;
-            z-index: 2;
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
         }
-        
-        .card-back {
-            background: linear-gradient(135deg, var(--primary), #1a2f5a);
-            color: white;
-            transform: rotateY(180deg);
-            z-index: 1;
-        }
-        
-        .offering-card:hover .card-front {
-            transform: rotateY(180deg);
-        }
-        
-        .offering-card:hover .card-back {
-            transform: rotateY(0);
-        }
-        
-        .offering-icon {
-            font-size: 4rem;
-            color: var(--secondary);
-            margin-bottom: 25px;
-            filter: drop-shadow(0 5px 10px rgba(201, 169, 110, 0.3));
-        }
-        
-        .offering-card h3 {
-            font-size: 1.8rem;
+
+        .product-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
             color: var(--primary);
-            margin-bottom: 15px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            z-index: 2;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
         }
-        
-        .card-back h3 {
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
             color: var(--secondary);
+            font-weight: bold;
+            margin: 10px 0;
         }
-        
-        /* Experience Section */
-        .experience-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary), #14274e);
+
+        .add-to-cart {
+            background: var(--primary);
             color: white;
-            position: relative;
-            overflow: hidden;
+            border: none;
+            padding: clamp(10px, 3vw, 12px) clamp(20px, 5vw, 25px);
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
-        
-        .experience-content {
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: clamp(50px, 10vw, 100px) 20px;
+            background: linear-gradient(135deg, var(--primary), #1a2f3f);
+            color: white;
+        }
+
+        .map-container {
             display: flex;
-            align-items: center;
-            gap: 60px;
+            gap: clamp(20px, 5vw, 50px);
+            max-width: 1400px;
+            margin: 0 auto;
             flex-wrap: wrap;
         }
-        
-        .experience-text {
+
+        .map-info {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
-        
-        .experience-text h2 {
-            font-size: 3.5rem;
-            color: var(--secondary);
-            margin-bottom: 25px;
-        }
-        
-        .experience-text p {
-            font-size: 1.2rem;
+
+        .map-info h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
             margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--secondary);
         }
-        
-        .experience-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 40px;
+
+        .map-address {
+            margin-bottom: 30px;
         }
-        
-        .feature-item {
+
+        .address-item {
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 20px;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            flex-wrap: wrap;
         }
-        
-        .feature-icon {
-            background: rgba(201, 169, 110, 0.2);
-            width: 50px;
-            height: 50px;
+
+        .address-icon {
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            background: rgba(212,175,55,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--secondary);
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            flex-shrink: 0;
         }
-        
-        .experience-visual {
+
+        .interactive-map {
             flex: 1;
-            min-width: 300px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1), rgba(12, 30, 62, 0.3));
+            min-width: 280px;
+            height: clamp(300px, 50vw, 400px);
+            background: rgba(255,255,255,0.1);
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(201, 169, 110, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            box-shadow: var(--shadow-medium);
-        }
-        
-        /* Location Luxury */
-        .location-luxury {
-            padding: 100px 0;
-            background-color: var(--light);
-        }
-        
-        .location-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .location-header h2 {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .location-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-strong);
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .location-map {
-            flex: 1;
-            min-width: 300px;
-            height: 500px;
-            background: linear-gradient(135deg, var(--primary), #1a2f5a);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 40px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(212,175,55,0.3);
         }
-        
-        .location-map:before {
-            content: '';
+
+        .map-pulse {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(201, 169, 110, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: moveMap 30s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
-        
-        @keyframes moveMap {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(-50px, -50px) rotate(360deg); }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212,175,55,0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 50px rgba(212,175,55,0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(212,175,55,0);
+            }
         }
-        
-        .location-info {
-            flex: 1;
-            min-width: 300px;
-            padding: 60px;
+
+        /* Virtual Tour */
+        .virtual-tour {
+            padding: clamp(50px, 10vw, 100px) 20px;
+            background: var(--light);
+        }
+
+        .tour-container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            gap: clamp(20px, 5vw, 40px);
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
         }
-        
-        .location-address {
-            margin-bottom: 40px;
+
+        .tour-360 {
+            flex: 1;
+            min-width: 280px;
+            height: clamp(300px, 50vw, 400px);
+            background: linear-gradient(135deg, var(--primary), #1a2f3f);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            transition: transform 0.1s;
+            box-shadow: var(--shadow-strong);
         }
-        
-        .location-address h3 {
-            font-size: 2.2rem;
+
+        .tour-360:active {
+            cursor: grabbing;
+        }
+
+        .tour-info {
+            flex: 1;
+            min-width: 280px;
+            padding: clamp(20px, 5vw, 40px);
+        }
+
+        .tour-info h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: var(--primary);
             margin-bottom: 20px;
+        }
+
+        .tour-features {
+            margin-top: 30px;
+        }
+
+        .tour-feature {
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-        
-        .address-detail {
-            font-size: 1.2rem;
-            color: #555;
             margin-bottom: 15px;
-            padding-left: 35px;
+            flex-wrap: wrap;
         }
-        
-        .brand-quote {
-            margin-top: 80px;
+
+        /* Testimonials */
+        .testimonials {
+            padding: clamp(50px, 10vw, 100px) 20px;
+            background: linear-gradient(135deg, #f8f4ed, #f0e9df);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
             text-align: center;
-            padding: 60px;
-            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1), rgba(12, 30, 62, 0.05));
+            padding: clamp(20px, 5vw, 40px);
+            background: white;
             border-radius: 20px;
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 10px;
         }
-        
-        .brand-quote:before {
-            content: '“';
-            position: absolute;
-            top: -30px;
-            left: 30px;
-            font-size: 12rem;
-            color: rgba(201, 169, 110, 0.1);
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .brand-quote p {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            line-height: 1.4;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .brand-quote .author {
-            margin-top: 30px;
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-        
-        /* Luxury Footer */
-        .luxury-footer {
-            background: var(--dark);
-            color: white;
-            padding: 80px 0 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
-        }
-        
-        .footer-brand {
-            max-width: 350px;
-        }
-        
-        .footer-brand h3 {
-            font-size: 2rem;
-            color: var(--secondary);
+
+        .testimonial-quote {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-style: italic;
+            color: #555;
             margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
         }
-        
-        .footer-links h4 {
+
+        .testimonial-author {
+            font-weight: bold;
             color: var(--secondary);
-            margin-bottom: 25px;
-            font-size: 1.3rem;
         }
-        
-        .footer-links ul {
-            list-style: none;
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
         }
-        
-        .footer-links li {
-            margin-bottom: 12px;
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
+
+        .dot.active {
+            background: var(--secondary);
+            transform: scale(1.3);
+        }
+
+        /* Cart Modal - Enhanced Styling */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: right 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+            padding: 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 480px) {
+            .cart-modal {
+                max-width: 100%;
+            }
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            background: var(--gold);
+            color: var(--primary);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .cart-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-            transform: translateX(5px);
+
+        .cart-header h3 i {
+            font-size: 1.8rem;
         }
-        
-        .footer-contact h4 {
-            color: var(--secondary);
-            margin-bottom: 25px;
-            font-size: 1.3rem;
-        }
-        
-        .contact-detail {
+
+        .close-cart {
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--primary);
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.8);
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
         }
-        
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+            background: rgba(255,255,255,0.3);
+        }
+
+        .cart-items {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), #1a2f3f);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cart-item-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-subtotal {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .cart-item-remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0f0f0;
+        }
+
+        .cart-item-remove:hover {
+            color: var(--danger);
+            background: #ffe0e0;
+            transform: scale(1.1);
+        }
+
+        .cart-footer {
+            padding: 25px 30px;
+            background: white;
+            border-top: 2px solid #f0f0f0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .cart-total span:last-child {
+            color: var(--secondary);
+            font-size: 1.6rem;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-clear-cart {
+            flex: 1;
+            background: transparent;
+            border: 2px solid #ddd;
+            color: #666;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-clear-cart:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+            background: #fff5f5;
+        }
+
+        .checkout-btn {
+            flex: 2;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.3);
+        }
+
+        .checkout-btn i {
+            font-size: 1.2rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px 20px;
+            color: #999;
+        }
+
+        .empty-cart i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-continue-shopping {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-continue-shopping:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: clamp(40px, 8vw, 60px) 20px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(20px, 5vw, 40px);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+        @media (max-width: 480px) {
+            .footer-section {
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .newsletter-input {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .newsletter-input input,
+            .newsletter-input button {
+                border-radius: 30px;
+                width: 100%;
+            }
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .newsletter-input {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-input input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .newsletter-input button {
+            padding: 12px 20px;
+            background: var(--gold);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            color: var(--primary);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-input button:hover {
+            background: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(212,175,55,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
         }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 3.5rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2.8rem;
-            }
-            
-            .experience-text h2 {
-                font-size: 2.8rem;
-            }
-        }
-        
+
+        /* Touch-friendly improvements */
         @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                gap: 20px;
+            .add-to-cart,
+            .btn-login,
+            .btn-register,
+            .checkout-btn,
+            .btn-clear-cart,
+            .btn-continue-shopping {
+                min-height: 44px;
             }
             
-            .hero-title {
-                font-size: 2.8rem;
+            .nav-item,
+            .social-icon,
+            .dot {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
-            .section-header h2 {
-                font-size: 2.3rem;
-            }
-            
-            .experience-text h2 {
-                font-size: 2.3rem;
-            }
-            
-            .brand-quote p {
-                font-size: 1.8rem;
+            input, button {
+                font-size: 16px;
             }
         }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
+
+        /* Auth Modals */
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--light);
+
+        .auth-modal.active {
+            display: flex;
         }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--secondary), var(--gold-dark));
-            border-radius: 10px;
+
+        .auth-container {
+            background: white;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .auth-close:hover {
+            color: var(--primary);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .auth-tab {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .auth-tab.active {
+            color: var(--secondary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--gold);
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.3);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .auth-footer span {
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .auth-footer span:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Luxury Header -->
-    <header class="luxury-header">
-        <div class="container header-inner">
-            <div class="brand-logo">
-                <div class="logo-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <div class="logo-text">
-                    <h1 class="cormorant">GREAT PARAGON</h1>
-                    <div class="tagline">Investment & Allied Services Limited</div>
-                </div>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <i class="fas fa-crown"></i>
             </div>
-            <a href="tel:09125473126" class="contact-gold">
-                <i class="fas fa-phone-alt"></i> 09125473126
-            </a>
+            <h2>GREAT PARAGON</h2>
+            <p>Investment & Allied Services Limited</p>
+            <div class="preloader-spinner"></div>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Where Luxury Meets Purpose</p>
+            <div class="preloader-progress">
+                <div class="preloader-bar"></div>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;">Please wait while we prepare your luxury experience...</p>
         </div>
-    </header>
+    </div>
 
-    <!-- Parallax Hero Section -->
-    <section class="parallax-hero">
-        <div class="floating-elements">
-            <div class="floating-element" style="width: 100px; height: 100px; top: 20%; left: 10%;"></div>
-            <div class="floating-element" style="width: 150px; height: 150px; top: 60%; right: 15%;"></div>
-            <div class="floating-element" style="width: 80px; height: 80px; bottom: 30%; left: 20%;"></div>
-        </div>
-        <div class="container hero-content">
-            <h1 class="hero-title">Where Luxury Meets Purpose</h1>
-            <p class="hero-subtitle">An unparalleled shopping experience in the heart of Kazaure. Discover designer perfumes, exquisite fashion, premium hair accessories, baby essentials, and everything in between.</p>
-            <a href="#offerings" class="gold-button">
-                <span>Explore Our Collections</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- Luxury Offerings -->
-    <section class="luxury-offerings" id="offerings">
-        <div class="container">
-            <div class="section-header">
-                <h2>✨ Our Exclusive Collections ✨</h2>
-                <p>Indulge in our curated selection of premium products designed for the discerning customer</p>
+    <!-- Auth Modals -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-close" onclick="closeAuthModal()">&times;</div>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
             </div>
             
-            <div class="offerings-grid">
-                <div class="offering-card">
-                    <div class="card-front">
-                        <div class="offering-icon">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <h3>Luxury Perfumes</h3>
-                        <p>Signature scents that define elegance and sophistication</p>
+            <!-- Login Form -->
+            <div class="auth-form active" id="loginForm">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
                     </div>
-                    <div class="card-back">
-                        <h3>Designer Fragrances</h3>
-                        <p>From classic to contemporary, our collection includes exclusive brands not found elsewhere in the region.</p>
-                        <div style="margin-top: 20px; font-size: 0.9rem;">Smell like royalty</div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password" required>
                     </div>
+                    <button type="submit" class="auth-submit">Login</button>
+                    <div class="auth-footer">
+                        Don't have an account? <span onclick="switchAuthTab('register')">Register here</span>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="auth-form" id="registerForm">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="auth-submit">Register</button>
+                    <div class="auth-footer">
+                        Already have an account? <span onclick="switchAuthTab('login')">Login here</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="logo">
+            <div class="logo-3d">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="logo-text">
+                <h1>GREAT PARAGON</h1>
+                <p>INVESTMENT & ALLIED SERVICES</p>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="nav-menu" id="navMenu">
+            <a href="#" class="nav-item" onclick="closeMobileMenu()">Home</a>
+            <a href="#collections" class="nav-item" onclick="closeMobileMenu()">Collections</a>
+            <a href="#experience" class="nav-item" onclick="closeMobileMenu()">Experience</a>
+            <a href="#location" class="nav-item" onclick="closeMobileMenu()">Visit</a>
+            
+            <!-- Auth Buttons -->
+            <!--<div class="auth-buttons">
+                <button class="btn-login" onclick="openAuthModal('login')">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn-register" onclick="openAuthModal('register')">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+        -->
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag" style="color: white; font-size: 20px;"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <canvas id="canvas-3d"></canvas>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element" style="width: 200px; height: 200px; top: 20%; left: 5%;"></div>
+        <div class="floating-element" style="width: 150px; height: 150px; bottom: 30%; right: 10%;"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; top: 60%; left: 20%;"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Experience <span>Luxury</span><br>Redefined</h1>
+            <p class="hero-subtitle">Discover Nigeria's premier luxury shopping destination in the heart of Kazaure, Jigawa State. From designer perfumes to exquisite fashion, we bring you the finest collection with unparalleled quality and service.</p>
+            <button class="add-to-cart" style="width: auto; padding: 15px 40px; background: var(--gold); color: var(--primary); font-weight: bold;" onclick="document.querySelector('#collections').scrollIntoView({behavior: 'smooth'})">
+                Explore Collections <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="showcase-section" id="collections">
+        <div class="section-header">
+            <h2>✨ Our Exclusive Collections ✨</h2>
+            <p>Curated just for you - luxury items that define elegance</p>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Perfumes -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Perfume" loading="lazy">
+                    <span class="product-tag">New</span>
                 </div>
-                
-                <div class="offering-card">
-                    <div class="card-front">
-                        <div class="offering-icon">
-                            <i class="fas fa-vest"></i>
-                        </div>
-                        <h3>Fashion Collections</h3>
-                        <p>Trendsetting outfits for men and women</p>
-                    </div>
-                    <div class="card-back">
-                        <h3>Style Redefined</h3>
-                        <p>Carefully curated fashion pieces that blend comfort, style, and luxury for every occasion.</p>
-                        <div style="margin-top: 20px; font-size: 0.9rem;">Look sharp, feel exceptional</div>
-                    </div>
+                <div class="product-info">
+                    <h3>Royal Gold Perfume</h3>
+                    <p>Designer fragrance collection</p>
+                    <div class="product-price">₦45,000</div>
+                    <button class="add-to-cart" onclick="addToCart(event, 'Royal Gold Perfume', 45000, 'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
                 </div>
-                
-                <div class="offering-card">
-                    <div class="card-front">
-                        <div class="offering-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>Hair Accessories</h3>
-                        <p>Premium pieces for that perfect finish</p>
-                    </div>
-                    <div class="card-back">
-                        <h3>Hair Elegance</h3>
-                        <p>From everyday essentials to special occasion masterpieces, our hair accessories complete your look.</p>
-                        <div style="margin-top: 20px; font-size: 0.9rem;">The perfect finishing touch</div>
-                    </div>
+            </div>
+            
+            <!-- Fashion -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashion" loading="lazy">
+                    <span class="product-tag">Premium</span>
                 </div>
-                
-                <div class="offering-card">
-                    <div class="card-front">
-                        <div class="offering-icon">
-                            <i class="fas fa-baby-carriage"></i>
-                        </div>
-                        <h3>Baby Essentials</h3>
-                        <p>Quality products for your precious little ones</p>
-                    </div>
-                    <div class="card-back">
-                        <h3>Premium Baby Care</h3>
-                        <p>Bathing sets, clothing, and essential items made with the finest materials for your baby's comfort and safety.</p>
-                        <div style="margin-top: 20px; font-size: 0.9rem;">Because they deserve the best</div>
-                    </div>
+                <div class="product-info">
+                    <h3>Luxury Kaftan Set</h3>
+                    <p>Designer men's wear</p>
+                    <div class="product-price">₦65,000</div>
+                    <button class="add-to-cart" onclick="addToCart(event, 'Luxury Kaftan Set', 65000, 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hair Accessories -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1596703263926-eb0762ee17e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hair Accessories" loading="lazy">
+                    <span class="product-tag">Exclusive</span>
+                </div>
+                <div class="product-info">
+                    <h3>Premium Hair Pieces</h3>
+                    <p>Luxury hair accessories</p>
+                    <div class="product-price">₦25,000</div>
+                    <button class="add-to-cart" onclick="addToCart(event, 'Premium Hair Pieces', 25000, 'https://images.unsplash.com/photo-1596703263926-eb0762ee17e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Baby Items -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Baby Items" loading="lazy">
+                    <span class="product-tag">Essential</span>
+                </div>
+                <div class="product-info">
+                    <h3>Baby Bathing Set</h3>
+                    <p>Premium baby essentials</p>
+                    <div class="product-price">₦15,000</div>
+                    <button class="add-to-cart" onclick="addToCart(event, 'Baby Bathing Set', 15000, 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section class="experience-section">
-        <div class="container">
-            <div class="experience-content">
-                <div class="experience-text">
-                    <h2>The Great Paragon Experience</h2>
-                    <p>More than just a shopping destination, we offer an immersive experience where every detail is crafted for your pleasure and convenience.</p>
+    <!-- Interactive Map Section -->
+    <section class="map-section" id="location">
+        <div class="map-container">
+            <div class="map-info">
+                <h2>Visit Our Luxury Store</h2>
+                <div class="map-address">
+                    <div class="address-item">
+                        <div class="address-icon">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        <div>
+                            <h4>Main Store</h4>
+                            <p>Opposite Garabasa Kanti, Kazaure, Jigawa State</p>
+                        </div>
+                    </div>
                     
-                    <div class="experience-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div>
-                                <h4>Curated Excellence</h4>
-                                <p>Every product is handpicked for quality</p>
-                            </div>
+                    <div class="address-item">
+                        <div class="address-icon">
+                            <i class="fas fa-clock"></i>
                         </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <div>
-                                <h4>Personalized Service</h4>
-                                <p>Tailored recommendations just for you</p>
-                            </div>
+                        <div>
+                            <h4>Opening Hours</h4>
+                            <p>Monday - Saturday: 8:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 6:00 PM</p>
                         </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div>
-                                <h4>Premium Quality</h4>
-                                <p>Uncompromising standards in every product</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-tags"></i>
-                            </div>
-                            <div>
-                                <h4>Exceptional Value</h4>
-                                <p>Luxury that doesn't break the bank</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="experience-visual">
-                    <div style="text-align: center; color: var(--secondary); font-size: 5rem; margin-bottom: 20px;">
-                        <i class="fas fa-store-alt"></i>
-                    </div>
-                    <h3 style="color: var(--secondary); text-align: center; margin-bottom: 20px;">Multi-Purpose Shopping Center</h3>
-                    <p style="text-align: center; color: rgba(255, 255, 255, 0.9);">
-                        Your one-stop destination for all shopping needs - from luxury items to daily essentials, all under one exquisite roof.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location Luxury -->
-    <section class="location-luxury" id="location">
-        <div class="container">
-            <div class="location-header">
-                <h2>📍 Visit Our Luxury Destination</h2>
-                <p>Experience Great Paragon in person at our prestigious location</p>
-            </div>
-            
-            <div class="location-card">
-                <div class="location-map">
-                    <div style="position: relative; z-index: 2; text-align: center;">
-                        <div style="font-size: 4rem; color: var(--secondary); margin-bottom: 20px;">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <h3 style="color: var(--secondary); margin-bottom: 15px;">We Are Here</h3>
-                        <p style="font-size: 1.2rem; max-width: 300px;">
-                            In the heart of Kazaure, Jigawa State
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="location-info">
-                    <div class="location-address">
-                        <h3><i class="fas fa-map-pin" style="color: var(--secondary);"></i> Our Address</h3>
-                        <p class="address-detail">
-                            <strong>Opposite Garabasa Kanti, Kazaure, Jigawa State</strong>
-                        </p>
-                        <p class="address-detail">
-                            <i class="fas fa-clock" style="color: var(--secondary);"></i> <strong>Opening Hours:</strong><br>
-                            Monday - Saturday: 8:00 AM - 8:00 PM<br>
-                            Sunday: 10:00 AM - 6:00 PM
-                        </p>
-                        <p class="address-detail">
-                            <i class="fas fa-phone-alt" style="color: var(--secondary);"></i> <strong>Contact:</strong> 09125473126
-                        </p>
                     </div>
                     
-                    <div class="location-address">
-                        <h3><i class="fas fa-car" style="color: var(--secondary);"></i> Visit Us Today</h3>
-                        <p class="address-detail">
-                            Conveniently located in the heart of the city with ample parking and a luxurious shopping environment.
-                        </p>
+                    <div class="address-item">
+                        <div class="address-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Contact</h4>
+                            <p>09044883463</p>
+                        </div>
                     </div>
                 </div>
+                
+                <button class="add-to-cart" style="width: auto; padding: 15px 30px; background: var(--gold); color: var(--primary);" onclick="window.open('https://maps.google.com/?q=Kazaure+Jigawa+Nigeria', '_blank')">
+                    <i class="fas fa-directions"></i> Get Directions
+                </button>
             </div>
             
-            <div class="brand-quote">
-                <p>Quality meets Luxury. This brand is light!</p>
-                <div class="author">— Great Paragon Motto</div>
+            <div class="interactive-map" onclick="window.open('https://maps.google.com/?q=Kazaure+Jigawa+Nigeria', '_blank')">
+                <div class="map-pulse"></div>
+                <div style="position: absolute; bottom: 20px; left: 20px; color: white; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 3; font-size: clamp(0.8rem, 3vw, 1rem);">
+                    <i class="fas fa-hand-pointer"></i> Click to open in Google Maps
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Luxury Footer -->
-    <footer class="luxury-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3 class="cormorant">Great Paragon</h3>
-                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 20px;">
-                        Your premier destination for luxury shopping in Kazaure, Jigawa State. Experience the perfect blend of quality, variety, and exceptional service.
-                    </p>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i>
-                        <span>Opposite Garabasa Kanti, Kazaure, Jigawa State</span>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#offerings"><i class="fas fa-chevron-right"></i> Collections</a></li>
-                        <li><a href="#location"><i class="fas fa-chevron-right"></i> Visit Us</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Great Paragon</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Contact Information</h4>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone-alt" style="color: var(--secondary);"></i>
-                        <span>09125473126</span>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-clock" style="color: var(--secondary);"></i>
-                        <span>Mon-Sat: 8AM-8PM<br>Sun: 10AM-6PM</span>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-shopping-bag" style="color: var(--secondary);"></i>
-                        <span>Multi-Purpose Shopping Center</span>
-                    </div>
+    <!-- Virtual Store Tour -->
+    <section class="virtual-tour" id="experience">
+        <div class="tour-container">
+            <div class="tour-360" id="tourCanvas">
+                <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 30px; z-index: 2; font-size: clamp(0.8rem, 3vw, 1rem); white-space: nowrap;">
+                    <i class="fas fa-mouse"></i> Drag to look around 360°
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 Great Paragon Investment & Allied Services Limited. All Rights Reserved.</p>
-                <p style="margin-top: 10px; color: var(--secondary);">"Quality meets Luxury. This brand is light!"</p>
+            <div class="tour-info">
+                <h2>The Great Paragon Experience</h2>
+                <p>Step into a world of luxury and elegance. Our store is designed to provide you with an immersive shopping experience like no other in the region.</p>
+                
+                <div class="tour-features">
+                    <div class="tour-feature">
+                        <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                        <span>Personal shopping assistants</span>
+                    </div>
+                    <div class="tour-feature">
+                        <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                        <span>Private viewing rooms</span>
+                    </div>
+                    <div class="tour-feature">
+                        <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                        <span>Complimentary refreshments</span>
+                    </div>
+                    <div class="tour-feature">
+                        <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+                        <span>Free parking for VIP customers</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; font-size: clamp(1.5rem, 5vw, 2rem); color: var(--secondary); font-family: 'Dancing Script', cursive;">
+                    "Quality meets Luxury. This brand is light!"
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <div class="testimonial-quote">
+                    "Great Paragon has completely transformed shopping in Jigawa. The quality of their products is unmatched, and the customer service is exceptional."
+                </div>
+                <div class="testimonial-author">- Hajiya Aisha, Kazaure</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-quote">
+                    "I traveled all the way from Kano just to shop here. Their perfume collection is better than anything I've seen in Lagos!"
+                </div>
+                <div class="testimonial-author">- Alhaji Suleiman, Kano</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-quote">
+                    "Finally, a place where I can get everything I need - from baby items to luxury fashion. Great Paragon is truly one of a kind."
+                </div>
+                <div class="testimonial-author">- Maryam B., Dutse</div>
+            </div>
+            
+            <div class="testimonial-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal - Enhanced -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <button class="btn-continue-shopping" onclick="toggleCart()">Continue Shopping</button>
+            </div>
+        </div>
+        
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total" id="cartTotal">
+                <span>Total:</span>
+                <span>₦0</span>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn-clear-cart" onclick="clearCart()">
+                    <i class="fas fa-trash-alt"></i> Clear
+                </button>
+                <button class="checkout-btn" onclick="checkout()">
+                    <i class="fab fa-whatsapp"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Great Paragon</h3>
+                <p>Your premier luxury shopping destination in Kazaure, Jigawa State. Quality meets luxury in every product we offer.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="closeMobileMenu()">Home</a></li>
+                    <li><a href="#collections" onclick="closeMobileMenu()">Collections</a></li>
+                    <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
+                    <li><a href="#location" onclick="closeMobileMenu()">Visit Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> Opposite Garabasa Kanti, Kazaure, Jigawa State</li>
+                    <li><i class="fas fa-phone"></i> 09044883463</li>
+                    <li><i class="fas fa-envelope"></i> info@greatparagon.com</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for exclusive offers</p>
+                <div class="newsletter-input">
+                    <input type="email" placeholder="Your email" id="newsletterEmail">
+                    <button onclick="subscribeNewsletter()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Great Paragon Investment & Allied Services Limited. All rights reserved.</p>
+            <p style="margin-top: 10px; color: var(--secondary);">"Quality meets Luxury. This brand is light!"</p>
         </div>
     </footer>
 
+    <!-- Include Three.js for 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.luxury-header');
-            if (window.scrollY > 100) {
-                header.style.padding = '10px 0';
-                header.style.background = 'rgba(12, 30, 62, 0.98)';
+        // Updated WhatsApp number
+        const WHATSAPP_NUMBER = '09044883463';
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            menu.classList.toggle('active');
+            btn.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            menu.classList.remove('active');
+            btn.classList.remove('active');
+        }
+
+        // Auth Modal Functions
+        function openAuthModal(tab) {
+            document.getElementById('authModal').classList.add('active');
+            switchAuthTab(tab);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function switchAuthTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
             } else {
-                header.style.padding = '15px 0';
-                header.style.background = 'rgba(12, 30, 62, 0.95)';
+                tabs[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            alert('Login functionality would be implemented here!');
+            closeAuthModal();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            alert('Registration functionality would be implemented here!');
+            closeAuthModal();
+        }
+
+        // Preloader - Exactly 5 seconds
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('preloader').style.display = 'none';
+                }, 1000);
+            }, 5000);
+        });
+
+        // Custom Cursor - Only on desktop
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            });
+        }
+
+        // Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
         });
+
+        // 3D Scene Setup for Hero
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-3d'), alpha: true });
         
-        // Floating elements animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const floatingElements = document.querySelectorAll('.floating-element');
-            floatingElements.forEach((el, index) => {
-                el.style.animationDelay = `${index * 2}s`;
-            });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create floating luxury items
+        const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0xd4af37,
+            emissive: 0x221100,
+            roughness: 0.4,
+            metalness: 0.8
+        });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xc49b63, emissive: 0x221100 });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.x = 3;
+        sphere.position.y = 1;
+        scene.add(sphere);
+
+        const ringGeometry = new THREE.TorusGeometry(1.5, 0.1, 16, 100);
+        const ringMaterial = new THREE.MeshStandardMaterial({ color: 0xd4af37, emissive: 0x221100 });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.position.x = -2;
+        ring.position.y = -1;
+        ring.rotation.x = Math.PI / 2;
+        scene.add(ring);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xd4af37, 1, 20);
+        pointLight.position.set(2, 3, 4);
+        scene.add(pointLight);
+        
+        const pointLight2 = new THREE.PointLight(0x446688, 0.5, 20);
+        pointLight2.position.set(-3, -1, 2);
+        scene.add(pointLight2);
+
+        camera.position.z = 5;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
             
-            // Animate offering cards on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            torusKnot.rotation.x += 0.005;
+            torusKnot.rotation.y += 0.01;
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
+            sphere.rotation.x += 0.01;
+            sphere.rotation.y += 0.02;
+            sphere.position.y = Math.sin(Date.now() * 0.002) * 2;
+            
+            ring.rotation.z += 0.005;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Cart Functionality - Enhanced
+        let cart = [];
+        let cartCount = 0;
+
+        function addToCart(event, name, price, image) {
+            event.stopPropagation();
+            
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ 
+                    name, 
+                    price, 
+                    image,
+                    quantity: 1,
+                    id: Date.now() + Math.random()
                 });
-            }, observerOptions);
+            }
             
-            // Observe offering cards
-            document.querySelectorAll('.offering-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(card);
+            cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            updateCart();
+            animateCart();
+            showNotification(`${name} added to cart!`);
+        }
+
+        function updateCart() {
+            document.querySelector('.cart-count').textContent = cartCount;
+            
+            const cartItems = document.getElementById('cartItems');
+            const cartFooter = document.getElementById('cartFooter');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                        <button class="btn-continue-shopping" onclick="toggleCart()">Continue Shopping</button>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+                return;
+            }
+            
+            cartFooter.style.display = 'block';
+            
+            let total = 0;
+            let html = '';
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image">
+                            <i class="fas fa-${getIconForProduct(item.name)}"></i>
+                        </div>
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
+                            <div class="cart-item-subtotal">
+                                Qty: ${item.quantity} | Subtotal: ₦${itemTotal.toLocaleString()}
+                            </div>
+                        </div>
+                        <div class="cart-item-remove" onclick="removeFromCart('${item.id}')">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                `;
             });
             
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+            cartItems.innerHTML = html;
+            document.getElementById('cartTotal').innerHTML = `
+                <span>Total:</span>
+                <span>₦${total.toLocaleString()}</span>
+            `;
+        }
+
+        function getIconForProduct(name) {
+            if (name.includes('Perfume')) return 'spray-can';
+            if (name.includes('Kaftan')) return 'tshirt';
+            if (name.includes('Hair')) return 'gem';
+            if (name.includes('Baby')) return 'baby';
+            return 'gift';
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id != id);
+            cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            updateCart();
+            showNotification('Item removed from cart');
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                cartCount = 0;
+                updateCart();
+                showNotification('Cart cleared');
+            }
+        }
+
+        function animateCart() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function showNotification(message) {
+            // Create temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--gold);
+                color: var(--primary);
+                padding: 15px 25px;
+                border-radius: 50px;
+                font-weight: 600;
+                z-index: 3000;
+                animation: slideInRight 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            `;
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            let message = 'Hello Great Paragon! I would like to order:\n\n';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                message += `• ${item.name} x${item.quantity} - ₦${itemTotal.toLocaleString()}\n`;
+                total += itemTotal;
+            });
+            
+            message += `\nTotal: ₦${total.toLocaleString()}\n`;
+            message += `\nFrom Great Paragon Website - "Quality meets Luxury. This brand is light!"`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // Optionally clear cart after checkout
+            // clearCart();
+        }
+
+        function openWhatsApp() {
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank');
+        }
+
+        // Testimonial Slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.dot');
+
+        function showTestimonial(index) {
+            testimonials.forEach((t, i) => {
+                t.style.display = i === index ? 'block' : 'none';
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                currentTestimonial = i;
+                showTestimonial(currentTestimonial);
+            });
+        });
+
+        showTestimonial(0);
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Virtual Tour
+        const tourCanvas = document.getElementById('tourCanvas');
+        let rotation = 0;
+        let isDragging = false;
+        let lastX = 0;
+
+        if (tourCanvas) {
+            tourCanvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                lastX = e.clientX;
+            });
+
+            tourCanvas.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                lastX = e.touches[0].clientX;
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const delta = e.clientX - lastX;
+                    rotation += delta * 0.01;
+                    tourCanvas.style.background = `linear-gradient(135deg, var(--primary), #1a2f3f)`;
+                    tourCanvas.style.transform = `perspective(1000px) rotateY(${rotation}deg)`;
+                    lastX = e.clientX;
+                }
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    const delta = e.touches[0].clientX - lastX;
+                    rotation += delta * 0.01;
+                    tourCanvas.style.transform = `perspective(1000px) rotateY(${rotation}deg)`;
+                    lastX = e.touches[0].clientX;
                     e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    closeMobileMenu();
+                }
             });
         });
-        
-        // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.parallax-hero');
-            parallax.style.backgroundPositionY = scrolled * 0.5 + 'px';
+
+        // Newsletter function
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (email) {
+                alert('Thank you for subscribing to our newsletter!');
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                alert('Please enter your email address');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('navMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            
+            if (menu.classList.contains('active') && 
+                !menu.contains(e.target) && 
+                !btn.contains(e.target)) {
+                closeMobileMenu();
+            }
         });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, 100);
+        });
+
+        // Add keyframe animations dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
